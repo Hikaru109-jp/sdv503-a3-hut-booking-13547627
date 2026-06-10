@@ -35,3 +35,13 @@ async function mainMenu() {
 }
 
 mainMenu()
+
+
+const loadData = () => {
+    try {
+        return JSON.parse(fs.readFileSync(`data.json`, `utf8`));
+    } catch(err) {
+        console.log("Data file not found or corrupt. Starting with empty data.");
+        return { huts: [], bookings: [] }
+    }
+}
