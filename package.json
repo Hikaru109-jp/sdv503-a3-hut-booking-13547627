@@ -1,0 +1,21 @@
+{
+  "name": "assessment-3",
+  "version": "1.0.0",
+  "description": "This repository is for Assessment 3.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hikaru109-jp/sdv503-a3-hut-booking-13547627.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hikaru109-jp/sdv503-a3-hut-booking-13547627/issues"
+  },
+  "homepage": "https://github.com/Hikaru109-jp/sdv503-a3-hut-booking-13547627#readme"
+}
