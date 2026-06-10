@@ -1,6 +1,20 @@
 {
   "huts": [
-    "test"
+    "test",
+    {
+      "id": 2,
+      "name": "Hikaru's hut",
+      "location": "Tokyo",
+      "walk": "Okano St",
+      "capacity": 40
+    },
+    {
+      "id": 3,
+      "name": "Kasumi",
+      "location": "Niigata",
+      "walk": "Nisazawa road",
+      "capacity": 1
+    }
   ],
   "bookings": []
 }
