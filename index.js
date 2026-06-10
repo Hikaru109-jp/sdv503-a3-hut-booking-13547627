@@ -11,3 +11,27 @@ const rl = readline.createInterface({
 function ask(q) {
     return new Promise(resolve => rl.question(q, resolve));
 }
+
+
+async function mainMenu() {
+    while(true){
+        const menu = await ask ("Enter Command: [RegisterHut, Book, List, Summary, Cancel, Exit]: ");
+            if(menu === "RegisterHut"){
+               await registerHut();
+            } else if(menu === "Book"){
+                await bookingHut();
+            } else if(menu === "List"){
+                await listBookings();
+            } else if(menu === "Summary"){
+                await summaryHut();
+            } else if(menu === "Cancel"){
+                await cancelHut();
+            } else if(menu === "Exit"){
+                await exitWork();
+            } else {
+                console.log("the command doesn’t exist");
+            }
+        }
+}
+
+mainMenu()
