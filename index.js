@@ -37,11 +37,18 @@ async function mainMenu() {
 mainMenu()
 
 
+//This code is for loading the data from data.json
 const loadData = () => {
     try {
-        return JSON.parse(fs.readFileSync(`data.json`, `utf8`));
+        return JSON.parse(fs.readFileSync("data.json", "utf8"));
     } catch(err) {
         console.log("Data file not found or corrupt. Starting with empty data.");
         return { huts: [], bookings: [] }
     }
 }
+
+//This code if for saving the data into data.json
+const saveData = (data) => {
+    fs.writeFileSync("data.json", JSON.stringify(data, null, 2));
+}
+
