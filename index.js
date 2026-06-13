@@ -101,6 +101,12 @@ async function registerHut() {
 async function bookingHut() {
     const name = await ask ("Hut name: ");
         if(!validateInput(name, "string", "Hut name")) return;
+    const data = loadData();
+    const hut = data.huts.find(h => h.name === name);
+        if(!hut){
+            console.log("The hut doesn't exist.");
+            return;
+        }
     const tramper = await ask ("Tramper name: ");
         if(!validateInput(tramper, "string", "Tramper name")) return;
     const date = await ask ("Arrival date: ");
@@ -111,14 +117,7 @@ async function bookingHut() {
     const size = await ask ("Party size: ");
         if(!validateInput(size, "number", "Party size")) return;
         const sizeNum = Number(size);
-    
-    
-    const data = loadData();
-    const hut = data.huts.find(h => h.name === name);
-    if(!hut){
-        console.log("The hut doesn't exist.");
-        return;
-    }
+
 
     const newBooking = {
         id: data.bookings.length + 1,

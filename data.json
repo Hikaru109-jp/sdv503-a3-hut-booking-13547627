@@ -1,6 +1,5 @@
 {
   "huts": [
-    "test",
     {
       "id": 2,
       "name": "Hikaru's hut",
@@ -37,5 +36,15 @@
       "capacity": 90
     }
   ],
-  "bookings": []
+  "bookings": [
+    {
+      "id": 1,
+      "hutId": 3,
+      "hutName": "Kasumi",
+      "tramperName": "Hikaru",
+      "arrivalDate": "24-07-2004",
+      "nights": 2,
+      "partySize": 2
+    }
+  ]
 }
