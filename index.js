@@ -34,7 +34,7 @@ async function mainMenu() {
         }
 }
 
-mainMenu()
+
 
 
 //This code is for loading the data from data.json
@@ -53,41 +53,87 @@ const saveData = (data) => {
 }
 
 
+const validateInput = (value, type, fieldName) => {
+    if(value === ""){
+        console.log(`${fieldName} can not be empty`);
+        return false;
+    }
+    if(type === "string" && !isNaN(value)){
+        console.log(`${fieldName} must be text, not a number`);
+        return false;
+    }
+    if(type === "number" && (isNaN(Number(value)) || Number(value) <= 0)){
+        console.log(`${fieldName} must be a positive number`);
+        return false;
+    }
+    return true;
+}
+
+
 //This function is for registering a hut.
 async function registerHut() {
     const name = await ask ("Name: ");
-        if(name === ""){
-            console.log("Name can not be empty");
-            return;
-        }
+        if(!validateInput(name, "string", "Name")) return;
     const location = await ask ("Location: ");
-        if(location === ""){
-            console.log("Location can not be empty");
-            return;
-        }
+        if(!validateInput(location, "string", "Location")) return;
     const walk = await ask ("Walk: ");
-        if(walk === ""){
-            console.log("Walk can not be empty");
-            return;
-        }
+        if(!validateInput(walk, "string", "Walk")) return;
     const capacity = await ask ("Capacity: ");
-    const capacityNum = Number(capacity); //ask method always return a string, so it is necessary to convert string to number.
-        if(isNaN(capacityNum) || capacityNum <= 0){
-            console.log("Capacity must be a positive number.");
-            return;
-        }
+        if(!validateInput(capacity, "number", "Capacity")) return;
+        const capacityNum = Number(capacity);
 
     const data = loadData(); //need to load data.json for maintaining existing data. *if you don't load the json file, your new data will over write to the existing data.
 
     const newHut = {
-    id: data.huts.length + 1,
-    name: name,
-    location: location,
-    walk: walk,
-    capacity: capacityNum
+        id: data.huts.length + 1,
+        name: name,
+        location: location,
+        walk: walk,
+        capacity: capacityNum
     };
 
     data.huts.push(newHut); //push method is for adding new elements into the array
     saveData(data);
     console.log("Your hut is successfully registered!");
 }
+
+
+async function bookingHut() {
+    const name = await ask ("Hut name: ");
+        if(!validateInput(name, "string", "Hut name")) return;
+    const tramper = await ask ("Tramper name: ");
+        if(!validateInput(tramper, "string", "Tramper name")) return;
+    const date = await ask ("Arrival date: ");
+        if(!validateInput(date, "string", "Arrival date")) return;
+    const nights = await ask ("Nights: ");
+        if(!validateInput(nights, "number", "Nights")) return;
+        const nightsNum = Number(nights);
+    const size = await ask ("Party size: ");
+        if(!validateInput(size, "number", "Party size")) return;
+        const sizeNum = Number(size);
+    
+    
+    const data = loadData();
+    const hut = data.huts.find(h => h.name === name);
+    if(!hut){
+        console.log("The hut doesn't exist.");
+        return;
+    }
+
+    const newBooking = {
+        id: data.bookings.length + 1,
+        hutId: hut.id,
+        hutName: name,
+        tramperName: tramper,
+        arrivalDate: date,
+        nights: nightsNum,
+        partySize: sizeNum
+    };
+
+    data.bookings.push(newBooking);
+    saveData(data);
+    console.log("Your booking is successfully registered!");
+}
+
+
+mainMenu()
