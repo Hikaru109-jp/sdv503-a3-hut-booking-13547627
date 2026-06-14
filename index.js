@@ -54,7 +54,7 @@ const saveData = (data) => {
 
 
 const validateInput = (value, type, fieldName) => {
-    if(value === ""){
+    if(value.trim() === ""){
         console.log(`${fieldName} can not be empty`);
         return false;
     }
@@ -114,6 +114,10 @@ async function bookingHut() {
     const nights = await ask ("Nights: ");
         if(!validateInput(nights, "number", "Nights")) return;
         const nightsNum = Number(nights);
+        if(nightsNum >= 10){
+            console.log("Nights must be less than 10.");
+            return;
+        }
     const size = await ask ("Party size: ");
         if(!validateInput(size, "number", "Party size")) return;
         const sizeNum = Number(size);
