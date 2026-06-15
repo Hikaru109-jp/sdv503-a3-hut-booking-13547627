@@ -109,8 +109,8 @@ async function bookingHut() {
         }
     const tramper = await ask ("Tramper name: ");
         if(!validateInput(tramper, "string", "Tramper name")) return;
-    const date = await ask ("Arrival date: ");
-        if(!validateInput(date, "string", "Arrival date")) return;
+    const date = await ask ("Arrival date (DDMMYYY): ");
+        if(!validateDate(date)) return;
     const nights = await ask ("Nights: ");
         if(!validateInput(nights, "number", "Nights")) return;
         const nightsNum = Number(nights);
@@ -128,7 +128,7 @@ async function bookingHut() {
         hutId: hut.id,
         hutName: name,
         tramperName: tramper,
-        arrivalDate: date,
+        arrivalDate : Number(date),
         nights: nightsNum,
         partySize: sizeNum
     };
@@ -136,6 +136,38 @@ async function bookingHut() {
     data.bookings.push(newBooking);
     saveData(data);
     console.log("Your booking is successfully registered!");
+}
+
+
+async function listBookings() {
+    const data = loadData();
+    const date = await ask ("Date (DDMMYYY): ");
+        if(!validateDate(date, "string", "Date")) return;
+    const name = await ask ("Hut's name: ");
+        if(!validateInput(name, "string","Hut's name")) return;
+    const hut = data.huts.find(h => h.name === name);  //find method is for identifying a specific value.
+        if(!hut){
+                console.log("The hut doesn't exist.");
+                return;
+            }
+    const bookings = data.bookings.filter(b => b.hutId === hut.id && b.arrivalDate === Number(date));  //filter method is for identifying a range of specific value.
+
+    if(bookings.length === 0){
+        console.log("The booking doesn't exist");
+        return;
+    }
+
+    bookings.forEach(b => {
+        console.log(`ID: ${b.id}, Tramper: ${b.tramperName}, Party size: ${b.partySize}`);
+    });
+}
+
+const validateDate = (value) => {
+    if(value.length !== 8 || isNaN(value)){
+        console.log("Date must be in DDMMYYYY format (e.g. 24072004)");
+        return false;
+    }
+    return true;
 }
 
 

@@ -42,7 +42,7 @@
       "hutId": 3,
       "hutName": "Kasumi",
       "tramperName": "Hikaru",
-      "arrivalDate": "24-07-2004",
+      "arrivalDate": 24072004,
       "nights": 2,
       "partySize": 2
     },
@@ -51,7 +51,7 @@
       "hutId": 3,
       "hutName": "Kasumi",
       "tramperName": "Hikaru",
-      "arrivalDate": "24-7-2004",
+      "arrivalDate": 24072004,
       "nights": 11,
       "partySize": 1
     }
