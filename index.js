@@ -215,6 +215,15 @@ async function cancelBooking() {
 }
 
 
+async function exitWork() {
+    const answer = await ask ("Are you sure to finish this work? ");
+        if(answer.toLowerCase() === "yes"){
+            console.log("complete this work");
+            process.exit();
+        } else {
+            return
+        }
+}
 
 
 
