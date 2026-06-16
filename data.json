@@ -34,6 +34,13 @@
       "location": "bhci",
       "walk": "bcije",
       "capacity": 90
+    },
+    {
+      "id": 6,
+      "name": "Hikaru",
+      "location": "Okano St",
+      "walk": "njwe st",
+      "capacity": 100
     }
   ],
   "bookings": [
@@ -54,6 +61,24 @@
       "arrivalDate": 24072004,
       "nights": 11,
       "partySize": 1
+    },
+    {
+      "id": 3,
+      "hutId": 6,
+      "hutName": "Hikaru",
+      "tramperName": "nxijw",
+      "arrivalDate": 16062026,
+      "nights": 5,
+      "partySize": 35
+    },
+    {
+      "id": 4,
+      "hutId": 6,
+      "hutName": "Hikaru",
+      "tramperName": "ghuifevhui",
+      "arrivalDate": 16062026,
+      "nights": 8,
+      "partySize": 90
     }
   ]
 }

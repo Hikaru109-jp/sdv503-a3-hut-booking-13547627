@@ -158,7 +158,7 @@ async function listBookings() {
     }
 
     bookings.forEach(b => {
-        console.log(`ID: ${b.id}, Tramper: ${b.tramperName}, Party size: ${b.partySize}`);
+        console.log(`ID: ${b.id}, Tramper: ${b.tramperName}, Party size: ${b.partySize}, Nights: ${b.nights}`);
     });
 }
 
@@ -171,4 +171,30 @@ const validateDate = (value) => {
 }
 
 
-mainMenu()
+function summaryHut() {
+    const data = loadData();
+    const group = data.bookings.reduce((acc, b) => {
+        const date = b.arrivalDate;
+        if(!acc[date]){
+            acc[date] = [];
+        }
+        acc[date].push(b);
+        return acc;
+
+    }, {});
+
+    Object.keys(group).forEach(date => {
+    const bookings = group[date];
+    const total = bookings.reduce((sum, b) => sum + b.partySize, 0);
+    const hut = data.huts.find(h => h.id === bookings[0].hutId);
+    const capacity = total / hut.capacity * 100;
+
+    console.log(`[${date}]`);
+    bookings.forEach(b => {
+        console.log(`${b.hutName} - (ID: ${b.id}, ${b.partySize} people)`);
+    });
+    console.log(`Occupancy of ${hut.name} - ${capacity}%`);
+    });
+}
+
+mainMenu();
