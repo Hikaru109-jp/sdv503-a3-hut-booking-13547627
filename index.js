@@ -25,7 +25,7 @@ async function mainMenu() {
             } else if(menu === "Summary"){
                 await summaryHut();
             } else if(menu === "Cancel"){
-                await cancelHut();
+                await cancelBooking();
             } else if(menu === "Exit"){
                 await exitWork();
             } else {
@@ -173,7 +173,7 @@ const validateDate = (value) => {
 
 function summaryHut() {
     const data = loadData();
-    const group = data.bookings.reduce((acc, b) => {
+    const group = data.bookings.reduce((acc, b) => {  //reduce() method is combine an array into a value.
         const date = b.arrivalDate;
         if(!acc[date]){
             acc[date] = [];
@@ -183,11 +183,11 @@ function summaryHut() {
 
     }, {});
 
-    Object.keys(group).forEach(date => {
+    Object.keys(group).forEach(date => {         //object.keys() method is for converting object to an array.  *forEach() can't use for object.
     const bookings = group[date];
-    const total = bookings.reduce((sum, b) => sum + b.partySize, 0);
-    const hut = data.huts.find(h => h.id === bookings[0].hutId);
-    const capacity = total / hut.capacity * 100;
+    const total = bookings.reduce((sum, b) => sum + b.partySize, 0);     //This is for calculating the total people on the day. 
+    const hut = data.huts.find(h => h.id === bookings[0].hutId);    //This if for identifying the hut.
+    const capacity = total / hut.capacity * 100;       //this is a calculation for total capacity on the day.
 
     console.log(`[${date}]`);
     bookings.forEach(b => {
@@ -196,5 +196,29 @@ function summaryHut() {
     console.log(`Occupancy of ${hut.name} - ${capacity}%`);
     });
 }
+
+
+async function cancelBooking() {
+    const data = loadData();
+    const name = await ask ("Tramper name: ");
+        if(!validateInput(name, "string", "Hut name")) return;
+    const date = await ask ("Arrival date(DDMMYYYY): ");
+        if(!validateDate(date, "number", "Arrival date")) return;
+    const booking = data.bookings.find(b => b.tramperName === name && b.arrivalDate === Number(date));
+        if(!booking){
+                console.log("The booking doesn't exist.");
+                return;
+            }
+    data.bookings = data.bookings.filter(b => b.id !== booking.id);   //filter() method is for maintaining other values without specific value.  
+    saveData(data);    //*filter() method only reply the new array, so necessary to save over.
+    console.log("Your cancellation is completed!");
+}
+
+
+
+
+
+
+
 
 mainMenu();
