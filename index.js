@@ -109,7 +109,7 @@ async function bookingHut() {
         }
     const tramper = await ask ("Tramper name: ");
         if(!validateInput(tramper, "string", "Tramper name")) return;
-    const date = await ask ("Arrival date (DDMMYYY): ");
+    const date = await ask ("Arrival date (DD-MM-YYY): ");
         if(!validateDate(date)) return;
     const nights = await ask ("Nights: ");
         if(!validateInput(nights, "number", "Nights")) return;
@@ -120,6 +120,9 @@ async function bookingHut() {
         }
     const size = await ask ("Party size: ");
         if(!validateInput(size, "number", "Party size")) return;
+        if(size <= data.capacity){
+            console.log("Overlapping the hut's capacity");
+        }
         const sizeNum = Number(size);
 
 
@@ -163,10 +166,36 @@ async function listBookings() {
 }
 
 const validateDate = (value) => {
-    if(value.length !== 8 || isNaN(value)){
-        console.log("Date must be in DDMMYYYY format (e.g. 24072004)");
-        return false;
+
+    const segments = value.split("-");
+    if (segments.find(s => Number.isNaN(Number(s)))){      //Number.isNaN() is a method for confirming whether the value is not a number.
+        console.log("Date must be a number");
     }
+  
+
+    const num = Number(segments.join(""));
+    
+    const day = (segments[0]);
+    const month = (segments[1]);
+    const year = (segments[2]);
+
+    const currentDate = new Date();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    
+        if(year < currentYear){
+            console.log("You must be in the future.");
+            return false;
+        } else if (month < currentMonth && year === currentYear){
+            console.log("You must be in the future.");
+            return false;
+        } else if (date < currentDate && mont === currentMonth && year === currentYear){
+            console.log("You must be in the future.")
+            return false;
+        } 
+    
+
     return true;
 }
 
@@ -231,3 +260,4 @@ async function exitWork() {
 
 
 mainMenu();
+

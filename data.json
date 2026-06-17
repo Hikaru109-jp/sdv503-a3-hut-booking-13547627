@@ -41,6 +41,13 @@
       "location": "Okano St",
       "walk": "njwe st",
       "capacity": 100
+    },
+    {
+      "id": 7,
+      "name": "Devon",
+      "location": "Nelson",
+      "walk": "Hikaru St",
+      "capacity": 30
     }
   ],
   "bookings": [
@@ -63,13 +70,13 @@
       "partySize": 1
     },
     {
-      "id": 4,
-      "hutId": 6,
-      "hutName": "Hikaru",
-      "tramperName": "ghuifevhui",
-      "arrivalDate": 16062026,
-      "nights": 8,
-      "partySize": 90
+      "id": 5,
+      "hutId": 7,
+      "hutName": "Devon",
+      "tramperName": "Ali",
+      "arrivalDate": 17062026,
+      "nights": 9,
+      "partySize": 9
     }
   ]
 }
