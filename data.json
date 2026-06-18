@@ -1,71 +1,8 @@
 {
   "huts": [
-    {
-      "id": 2,
-      "name": "Hikaru's hut",
-      "location": "Tokyo",
-      "walk": "Okano St",
-      "capacity": 40
-    },
-    {
-      "id": 3,
-      "name": "Kasumi",
-      "location": "Niigata",
-      "walk": "Nisazawa road",
-      "capacity": 1
-    },
-    {
-      "id": 4,
-      "name": "33",
-      "location": "33",
-      "walk": "3",
-      "capacity": 3
-    },
-    {
-      "id": 5,
-      "name": "99",
-      "location": "33",
-      "walk": "33",
-      "capacity": 33
-    },
-    {
-      "id": 6,
-      "name": "jic",
-      "location": "bhci",
-      "walk": "bcije",
-      "capacity": 90
-    },
-    {
-      "id": 6,
-      "name": "Hikaru",
-      "location": "Okano St",
-      "walk": "njwe st",
-      "capacity": 100
-    },
-    {
-      "id": 7,
-      "name": "Devon",
-      "location": "Nelson",
-      "walk": "Hikaru St",
-      "capacity": 30
-    },
-    {
-      "id": 8,
-      "name": "Nishizawa",
-      "location": "Kasumi",
-      "walk": "Okano St",
-      "capacity": 80
-    }
+  
   ],
   "bookings": [
-    {
-      "id": 1,
-      "hutId": 8,
-      "hutName": "Nishizawa",
-      "tramperName": "Rune",
-      "arrivalDate": "19-06-2026",
-      "nights": 5,
-      "partySize": 30
-    }
+
   ]
 }

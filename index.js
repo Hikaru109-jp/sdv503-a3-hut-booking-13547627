@@ -16,17 +16,18 @@ function ask(q) {
 async function mainMenu() {
     while(true){
         const menu = await ask ("Enter Command: [RegisterHut, Book, List, Summary, Cancel, Exit]: ");
-            if(menu === "RegisterHut"){
+        const command = menu.trim().toLowerCase();   //trim() method is for removing space before and after.
+            if(command === "registerhut"){
                await registerHut();
-            } else if(menu === "Book"){
+            } else if(command === "book"){
                 await bookingHut();
-            } else if(menu === "List"){
+            } else if(command === "list"){
                 await listBookings();
-            } else if(menu === "Summary"){
+            } else if(command === "summary"){
                 await summaryHut();
-            } else if(menu === "Cancel"){
+            } else if(command === "cancel"){
                 await cancelBooking();
-            } else if(menu === "Exit"){
+            } else if(command === "exit"){
                 await exitWork();
             } else {
                 console.log("the command doesn’t exist");
@@ -120,9 +121,7 @@ async function bookingHut() {
         }
     const size = await ask ("Party size: ");
         if(!validateInput(size, "number", "Party size")) return;
-        if(size <= data.capacity){
-            console.log("Overlapping the hut's capacity");
-        }
+
         const sizeNum = Number(size);
 
         if(!validateCapacity(data, hut.id, date, nightsNum, sizeNum)){
@@ -253,9 +252,9 @@ function summaryHut() {
 async function cancelBooking() {
     const data = loadData();
     const name = await ask ("Tramper name: ");
-        if(!validateInput(name, "string", "Hut name")) return;
-    const date = await ask ("Arrival date(DDMMYYYY): ");
-        if(!validateDate(date, "number", "Arrival date")) return;
+        if(!validateInput(name, "string", "Tramper name")) return;
+    const date = await ask ("Arrival date(DD-MM-YYYY): ");
+        if(!validateInput(date, "string", "Arrival date")) return;
     const booking = data.bookings.find(b => b.tramperName === name && b.arrivalDate === date);
         if(!booking){
                 console.log("The booking doesn't exist.");
