@@ -125,6 +125,10 @@ async function bookingHut() {
         }
         const sizeNum = Number(size);
 
+        if(!validateCapacity(data, hut.id, date, nightsNum, sizeNum)){
+            console.log("Capacity over on the day.");
+            return;
+        }
 
     const newBooking = {
         id: data.bookings.length + 1,
@@ -144,8 +148,8 @@ async function bookingHut() {
 
 async function listBookings() {
     const data = loadData();
-    const date = await ask ("Date (DDMMYYY): ");
-        if(!validateDate(date, "string", "Date")) return;
+    const date = await ask ("Date (DD-MM-YYY): ");
+        if(!validateInput(date, "string", "Date")) return;
     const name = await ask ("Hut's name: ");
         if(!validateInput(name, "string","Hut's name")) return;
     const hut = data.huts.find(h => h.name === name);  //find method is for identifying a specific value.
@@ -153,7 +157,26 @@ async function listBookings() {
                 console.log("The hut doesn't exist.");
                 return;
             }
-    const bookings = data.bookings.filter(b => b.hutId === hut.id && b.arrivalDate === Number(date));  //filter method is for identifying a range of specific value.
+    const bookings = data.bookings.filter(b => {       //filter method is for identifying a range of specific value.
+        if(b.hutId !== hut.id) return false;
+        
+        const existSegments = b.arrivalDate.split("-");
+        const existDay = Number(existSegments[0]);
+        const existMonth = Number(existSegments[1]);
+        const existYear = Number(existSegments[2]);
+        const existArrival = new Date(existYear, existMonth - 1, existDay);
+        
+        const existDeparture = new Date(existArrival);
+        existDeparture.setDate(existArrival.getDate() + b.nights);
+        
+        const searchSegments = date.split("-");
+        const searchDay = Number(searchSegments[0]);
+        const searchMonth = Number(searchSegments[1]);
+        const searchYear = Number(searchSegments[2]);
+        const searchDate = new Date(searchYear, searchMonth - 1, searchDay);
+        
+        return searchDate >= existArrival && searchDate < existDeparture;
+    });  
 
     if(bookings.length === 0){
         console.log("The booking doesn't exist");
@@ -233,7 +256,7 @@ async function cancelBooking() {
         if(!validateInput(name, "string", "Hut name")) return;
     const date = await ask ("Arrival date(DDMMYYYY): ");
         if(!validateDate(date, "number", "Arrival date")) return;
-    const booking = data.bookings.find(b => b.tramperName === name && b.arrivalDate === Number(date));
+    const booking = data.bookings.find(b => b.tramperName === name && b.arrivalDate === date);
         if(!booking){
                 console.log("The booking doesn't exist.");
                 return;
@@ -255,7 +278,42 @@ async function exitWork() {
 }
 
 
+const validateCapacity = (data, hutId, arrivalDate, nights, partySize) => {
+    const hut = data.huts.find(h => h.id === hutId);
+    const segments = arrivalDate.split("-");
+    
+    const day = Number(segments[0]);
+    const month = Number(segments[1]);
+    const year = Number(segments[2]);
+    const arrival = new Date(year, month - 1, day);  //JavaScript counts on months from 0. i.g.) if the input is 7 month, JavaScript recognizes it as 8 month.
 
+    for(let i = 0; i < nights; i++){
+    const checkDate = new Date(arrival);   //new Date() method is for making a date object.
+    checkDate.setDate(arrival.getDate() + i);  //getDate() method is for getting date from the object. setDate() method is for changing the date in the object.
+    const total = data.bookings.reduce((sum, b) => {
+        if(b.hutId !== hutId) return sum;  
+            const existSegments = b.arrivalDate.split("-");
+            const existDay = Number(existSegments[0]);
+            const existMonth = Number(existSegments[1]);
+            const existYear = Number(existSegments[2]);
+            const existArrival = new Date(existYear, existMonth - 1, existDay);
+
+            const existDeparture = new Date(existArrival);
+            existDeparture.setDate(existArrival.getDate() + b.nights); //This code is for showing the departure date.
+
+            if(checkDate >= existArrival && checkDate < existDeparture){
+                return sum + b.partySize;
+            }
+            return sum;
+
+    }, 0);
+
+      if(total + partySize > hut.capacity){
+        return false;
+      }
+    }
+    return true;
+}
 
 
 
