@@ -131,7 +131,7 @@ async function bookingHut() {
         hutId: hut.id,
         hutName: name,
         tramperName: tramper,
-        arrivalDate : Number(date),
+        arrivalDate : date,
         nights: nightsNum,
         partySize: sizeNum
     };
@@ -175,9 +175,9 @@ const validateDate = (value) => {
 
     const num = Number(segments.join(""));
     
-    const day = (segments[0]);
-    const month = (segments[1]);
-    const year = (segments[2]);
+    const day = Number(segments[0]);
+    const month = Number(segments[1]);
+    const year = Number(segments[2]);
 
     const currentDate = new Date();
     const currentDay = currentDate.getDate();
@@ -190,7 +190,7 @@ const validateDate = (value) => {
         } else if (month < currentMonth && year === currentYear){
             console.log("You must be in the future.");
             return false;
-        } else if (date < currentDate && mont === currentMonth && year === currentYear){
+        } else if (day < currentDay && month === currentMonth && year === currentYear){
             console.log("You must be in the future.")
             return false;
         } 

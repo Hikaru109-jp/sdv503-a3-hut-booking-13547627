@@ -77,6 +77,33 @@
       "arrivalDate": 17062026,
       "nights": 9,
       "partySize": 9
+    },
+    {
+      "id": 4,
+      "hutId": 6,
+      "hutName": "Hikaru",
+      "tramperName": "Hajime",
+      "arrivalDate": null,
+      "nights": 3,
+      "partySize": 10
+    },
+    {
+      "id": 5,
+      "hutId": 7,
+      "hutName": "Devon",
+      "tramperName": "Kaneko",
+      "arrivalDate": null,
+      "nights": 3,
+      "partySize": 5
+    },
+    {
+      "id": 6,
+      "hutId": 7,
+      "hutName": "Devon",
+      "tramperName": "Kaneko",
+      "arrivalDate": "18-06-2026",
+      "nights": 2,
+      "partySize": 3
     }
   ]
 }
