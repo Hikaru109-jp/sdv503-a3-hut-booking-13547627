@@ -100,9 +100,13 @@ async function registerHut() {
 
 
 async function bookingHut() {
+    const data = loadData();  
+        if(data.huts.length === 0){
+        console.log("No huts registered yet.");
+        return;
+        }
     const name = await ask ("Hut name: ");
         if(!validateInput(name, "string", "Hut name")) return;
-    const data = loadData();
     const hut = data.huts.find(h => h.name === name);
         if(!hut){
             console.log("The hut doesn't exist.");
@@ -128,6 +132,13 @@ async function bookingHut() {
             console.log("Capacity over on the day.");
             return;
         }
+
+    const duplicate = data.bookings.find(b => b.hutId === hut.id && b.tramperName === tramper && b.arrivalDate === date);
+
+    if(duplicate){
+        console.log("This booking already exists.");
+        return;
+    };
 
     const newBooking = {
         id: data.bookings.length + 1,
@@ -313,6 +324,8 @@ const validateCapacity = (data, hutId, arrivalDate, nights, partySize) => {
     }
     return true;
 }
+
+
 
 
 

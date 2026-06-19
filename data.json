@@ -1,8 +1,31 @@
 {
   "huts": [
-  
+    {
+      "id": 1,
+      "name": "CGI503",
+      "location": "nmit",
+      "walk": "Nelson St",
+      "capacity": 100
+    }
   ],
   "bookings": [
-
+    {
+      "id": 1,
+      "hutId": 1,
+      "hutName": "CGI503",
+      "tramperName": "Hikaru Okano",
+      "arrivalDate": "19-06-2026",
+      "nights": 3,
+      "partySize": 15
+    },
+    {
+      "id": 2,
+      "hutId": 1,
+      "hutName": "CGI503",
+      "tramperName": "nmit",
+      "arrivalDate": "19-06-2026",
+      "nights": 3,
+      "partySize": 15
+    }
   ]
 }
