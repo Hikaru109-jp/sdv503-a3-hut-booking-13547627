@@ -204,9 +204,6 @@ const validateDate = (value) => {
     if (segments.find(s => Number.isNaN(Number(s)))){      //Number.isNaN() is a method for confirming whether the value is not a number.
         console.log("Date must be a number");
     }
-  
-
-    const num = Number(segments.join(""));
     
     const day = Number(segments[0]);
     const month = Number(segments[1]);
@@ -255,7 +252,7 @@ function summaryHut() {
     bookings.forEach(b => {
         console.log(`${b.hutName} - (ID: ${b.id}, ${b.partySize} people)`);
     });
-    console.log(`Occupancy of ${hut.name} - ${capacity}%`);
+    console.log(`Occupancy of ${hut.name} - ${capacity.toFixed(1)}%`);  //tofixed() method is for adjusting the decimal point.
     });
 }
 
@@ -281,6 +278,7 @@ async function exitWork() {
     const answer = await ask ("Are you sure to finish this work? ");
         if(answer.toLowerCase() === "yes"){
             console.log("complete this work");
+            rl.close();
             process.exit();
         } else {
             return
