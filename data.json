@@ -6,6 +6,27 @@
       "location": "nmit",
       "walk": "Nelson St",
       "capacity": 100
+    },
+    {
+      "id": 2,
+      "name": "Hikaru's hut",
+      "location": "Okano St",
+      "walk": "nmit road",
+      "capacity": 50
+    },
+    {
+      "id": 3,
+      "name": "SDV503",
+      "location": "building-A",
+      "walk": "Nelson St",
+      "capacity": 30
+    },
+    {
+      "id": 4,
+      "name": "SDV503",
+      "location": "building-A",
+      "walk": "Nelson St",
+      "capacity": 30
     }
   ],
   "bookings": [
@@ -16,16 +37,34 @@
       "tramperName": "Hikaru Okano",
       "arrivalDate": "19-06-2026",
       "nights": 3,
-      "partySize": 15
+      "partySize": 50
     },
     {
       "id": 2,
       "hutId": 1,
       "hutName": "CGI503",
-      "tramperName": "nmit",
-      "arrivalDate": "19-06-2026",
+      "tramperName": "Kasumi Nishizawa",
+      "arrivalDate": "20-06-2026",
       "nights": 3,
-      "partySize": 15
+      "partySize": 12
+    },
+    {
+      "id": 3,
+      "hutId": 2,
+      "hutName": "Hikaru's hut",
+      "tramperName": "Ali",
+      "arrivalDate": "20-06-2026",
+      "nights": 3,
+      "partySize": 20
+    },
+    {
+      "id": 4,
+      "hutId": 3,
+      "hutName": "SDV503",
+      "tramperName": "Ali",
+      "arrivalDate": "20-06-2026",
+      "nights": 5,
+      "partySize": 20
     }
   ]
 }
