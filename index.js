@@ -196,6 +196,10 @@ async function listBookings() {
     bookings.forEach(b => {
         console.log(`ID: ${b.id}, Tramper: ${b.tramperName}, Party size: ${b.partySize}, Nights: ${b.nights}`);
     });
+
+    const total = bookings.reduce((sum, b) => sum + b.partySize, 0);
+    const remaining = hut.capacity - total;
+    console.log(`Remaining capacity on this day: ${remaining}`);
 }
 
 const validateDate = (value) => {

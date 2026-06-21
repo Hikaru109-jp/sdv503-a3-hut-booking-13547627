@@ -65,6 +65,15 @@
       "arrivalDate": "20-06-2026",
       "nights": 5,
       "partySize": 20
+    },
+    {
+      "id": 5,
+      "hutId": 2,
+      "hutName": "Hikaru's hut",
+      "tramperName": "Elias",
+      "arrivalDate": "20-06-2026",
+      "nights": 7,
+      "partySize": 24
     }
   ]
 }
